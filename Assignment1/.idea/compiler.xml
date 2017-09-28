@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Assginment1" target="1.5" />
-      <module name="Assignment1" target="1.5" />
+      <module name="Assignment1" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
