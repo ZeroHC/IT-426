@@ -113,8 +113,8 @@ public class CalculatorUI extends Application
         gridPane.add(buttonDivide, 3, 4);
 
         //add styles to the elements using an external stylesheet
-        Scene mainScene = new Scene(gridPane, 210, 250);
-        mainScene.getStylesheets().add("Styles.css");
+        Scene mainScene = new Scene(gridPane, 410, 450);
+        mainScene.getStylesheets().add("styles/Styles.css");
 
         //returns the scene
         return mainScene;

@@ -14,9 +14,9 @@
     -fx-font-family: "Courier New", Courier, monospace;
     -fx-font-size: 16px;
     -fx-alignment: center;
-    -fx-vgap: 10px;
-    -fx-hgap: 10px;
-    -fx-padding: 10px;
+    -fx-vgap: 20px;
+    -fx-hgap: 20px;
+    -fx-padding: 15px;
 }
 
 /*
@@ -25,8 +25,8 @@
 .label{
     -fx-font-weight: bold;
     -fx-background-radius: 6px;
-    -fx-min-width: 170px;
-    -fx-padding: 5px;
+    -fx-min-width: 270px;
+    -fx-padding: 10px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
     -fx-border-style: solid;
@@ -45,12 +45,12 @@
     -fx-alignment: center;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-min-width: 35px;
-    -fx-min-height: 35px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
 }
 
 .button#enter{
-    -fx-min-width: 80px;
+    -fx-min-width: 120px;
 }
 
 /*
