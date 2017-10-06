@@ -1,34 +1,64 @@
 package ui;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+/*
+ * Hanchen (Zero) Liu
+ * 10/06/2017
+ * CalculatorUI.java
+ *
+ * This class creates an calculator ui
+ */
+
+ /**
+ * This class creates and calculator ui
+ *
+ * @author Hanchen (Zero) Liu
+ * @version 1.0
+ */
+
 public class CalculatorUI extends Application
 {
+
+    /**
+     * The main entry point for all JavaFX applications.
+     * The start method is called after the init method has returned,
+     * and after the system is ready for the application to begin running.
+     *
+     * @param stage the primary stage for this application,
+     *             onto which the application scene can be set.
+     *             The primary stage will be embedded in the
+     *              browser if the application was launched as an applet.
+     *              Applications may create other stages, if needed,
+     *              but they will not be primary stages and will not be embedded in the browser
+     *
+     * @throws Exception
+     */
     @Override
-    public void start(Stage stage)
+    public void start(Stage stage) throws Exception
     {
+        //set the title for the stage
         stage.setTitle("Calculator");
+
+        //set the scene for the stage
         stage.setScene(createCalculator());
+
+        //show the stage
         stage.show();
     }
 
+    /*
+     * This method creates the calculator ui
+     */
     private Scene createCalculator()
     {
         //assemble our controls in a grid
         GridPane gridPane = new GridPane();
-
-//        //set spacing around elements
-//        gridPane.setAlignment(Pos.CENTER);
-//        gridPane.setHgap(10);
-//        gridPane.setVgap(10);
-//        gridPane.setPadding(new Insets(10));
 
         //create an output box
         HBox outputBox = new HBox();
@@ -56,6 +86,7 @@ public class CalculatorUI extends Application
         Button buttonDivide = new Button("/");
         Button buttonEnter = new Button("Enter");
 
+        //set an id for the enter button
         buttonEnter.setId("enter");
 
         //add first row of buttons to the grid pane
@@ -85,6 +116,7 @@ public class CalculatorUI extends Application
         Scene mainScene = new Scene(gridPane, 210, 250);
         mainScene.getStylesheets().add("Styles.css");
 
+        //returns the scene
         return mainScene;
     }
 }
