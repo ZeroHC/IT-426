@@ -24,6 +24,11 @@ import javafx.stage.Stage;
 
 public class CalculatorUI extends Application
 {
+    //use an array to store number buttons from 1 - 9
+    private static final String[] NUMBER_BUTTONS = new String[]{"7", "8", "9", "4", "5", "6", "1", "2", "3"};
+
+    //use an array to store the operators
+    private static final String[] OPERATORS = new String[]{"+", "-", "*", "/"};
 
     /**
      * The main entry point for all JavaFX applications.
@@ -69,48 +74,39 @@ public class CalculatorUI extends Application
         //add the display box to the grid pane
         gridPane.add(outputBox, 0, 0, 3, 1);
 
-        //initialize all the buttons
+        //set an int to represent the array's index, starts from 0
+        int buttonIndex = 0;
+
+        //set the number of rows
+        int rowCount = 3;
+        //set the number of columns
+        int columnCount = 3;
+
+        //use a for loop to create number buttons
+        for (int i = 1; i <= rowCount; i++)
+        {
+            for (int j = 0; j < columnCount; j++)
+            {
+                gridPane.add(new Button(""+ NUMBER_BUTTONS[buttonIndex]+""), j, i);
+                buttonIndex++;
+            }
+        }
+
+        //use for loop to create operator buttons
+        for (int k = 0; k < OPERATORS.length; k++)
+        {
+            gridPane.add(new Button(""+ OPERATORS[k]+""), columnCount, k + 1);
+        }
+
+        //creates the 0 button
         Button button0 = new Button("0");
-        Button button1 = new Button("1");
-        Button button2 = new Button("2");
-        Button button3 = new Button("3");
-        Button button4 = new Button("4");
-        Button button5 = new Button("5");
-        Button button6 = new Button("6");
-        Button button7 = new Button("7");
-        Button button8 = new Button("8");
-        Button button9 = new Button("9");
-        Button buttonAdd = new Button("+");
-        Button buttonSubtract = new Button("-");
-        Button buttonMultiply = new Button("*");
-        Button buttonDivide = new Button("/");
-        Button buttonEnter = new Button("Enter");
-
-        //set an id for the enter button
-        buttonEnter.setId("enter");
-
-        //add first row of buttons to the grid pane
-        gridPane.add(button7, 0, 1);
-        gridPane.add(button8, 1, 1);
-        gridPane.add(button9, 2, 1);
-        gridPane.add(buttonAdd, 3, 1);
-
-        //add second row of buttons to the grid pane
-        gridPane.add(button4, 0, 2);
-        gridPane.add(button5, 1, 2);
-        gridPane.add(button6, 2, 2);
-        gridPane.add(buttonSubtract, 3, 2);
-
-        //add third row of buttons to the grid pane
-        gridPane.add(button1, 0, 3);
-        gridPane.add(button2, 1, 3);
-        gridPane.add(button3, 2, 3);
-        gridPane.add(buttonMultiply, 3, 3);
-
-        //add last row of buttons to the grid pane
         gridPane.add(button0, 0, 4);
-        gridPane.add(buttonEnter, 1, 4, 2, 1);
-        gridPane.add(buttonDivide, 3, 4);
+
+        //creates the enter button
+        Button enterButton = new Button("Enter");
+        //set an id to the enter button
+        enterButton.setId("enter");
+        gridPane.add(enterButton, 1, 4, 2, 1);
 
         //add styles to the elements using an external stylesheet
         Scene mainScene = new Scene(gridPane, 350, 420);
