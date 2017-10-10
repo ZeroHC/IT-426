@@ -30,6 +30,11 @@ public class CalculatorUI extends Application
     //use an array to store the operators
     private static final String[] OPERATORS = new String[]{"+", "-", "*", "/"};
 
+    //set the number of columns
+    private static final int COLUMN_COUNT = 3;
+    //set the number of rows
+    private static final int ROW_COUNT = 3;
+
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -77,15 +82,10 @@ public class CalculatorUI extends Application
         //set an int to represent the array's index, starts from 0
         int buttonIndex = 0;
 
-        //set the number of rows
-        int rowCount = 3;
-        //set the number of columns
-        int columnCount = 3;
-
         //use a for loop to create number buttons
-        for (int i = 1; i <= rowCount; i++)
+        for (int i = 1; i <= ROW_COUNT; i++)
         {
-            for (int j = 0; j < columnCount; j++)
+            for (int j = 0; j < COLUMN_COUNT; j++)
             {
                 gridPane.add(new Button(""+ NUMBER_BUTTONS[buttonIndex]+""), j, i);
                 buttonIndex++;
@@ -95,7 +95,7 @@ public class CalculatorUI extends Application
         //use for loop to create operator buttons
         for (int k = 0; k < OPERATORS.length; k++)
         {
-            gridPane.add(new Button(""+ OPERATORS[k]+""), columnCount, k + 1);
+            gridPane.add(new Button(""+ OPERATORS[k]+""), COLUMN_COUNT, k + 1);
         }
 
         //creates the 0 button
