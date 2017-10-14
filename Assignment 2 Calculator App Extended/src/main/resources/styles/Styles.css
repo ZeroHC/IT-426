@@ -12,10 +12,9 @@
     /* use -fx- as prefix for javafx styling*/
     -fx-background-color: #4d4d4d;
     -fx-font-family: "Courier New", Courier, monospace;
-    -fx-font-size: 20px;
     -fx-alignment: center;
-    -fx-vgap: 10px;
-    -fx-hgap: 10px;
+    -fx-vgap: 15px;
+    -fx-hgap: 15px;
     -fx-padding: 15px;
 }
 
@@ -24,9 +23,11 @@
  */
 .label{
     -fx-font-weight: bold;
+    -fx-font-size: 36px;
     -fx-background-radius: 6px;
-    -fx-min-width: 360px;
-    -fx-padding: 15px;
+    -fx-min-width: 390px;
+    -fx-max-width: 390px;
+    -fx-padding: 10px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
     -fx-border-style: solid;

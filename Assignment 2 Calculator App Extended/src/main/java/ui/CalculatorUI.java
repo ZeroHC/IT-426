@@ -77,9 +77,7 @@ public class CalculatorUI extends Application
         stage.show();
     }
 
-    /*
-     * This method creates the calculator ui
-     */
+    //This method creates the calculator ui
     private Scene createCalculator()
     {
         //assemble our controls in a grid
@@ -94,10 +92,46 @@ public class CalculatorUI extends Application
         //add the display box to the grid pane
         gridPane.add(outputBox, 0, 0, 5, 1);
 
-        /*
-         * create an all clear button which will not only reset the output text,
-         * but also clears all the operands, operator, and the history results
-         */
+        createAllButtons(gridPane, output);
+
+        //add styles to the elements using an external stylesheet
+        Scene mainScene = new Scene(gridPane, 460, 540);
+        mainScene.getStylesheets().add("styles/Styles.css");
+
+        //returns the scene
+        return mainScene;
+    }
+
+    //this method creates all the buttons
+    private void createAllButtons(GridPane gridPane, Label output)
+    {
+        createFirstRowButtons(gridPane, output);
+        createNumberButtons(gridPane, output);
+        createOperatorButtons(gridPane, output);
+        createLastRowButtons(gridPane, output);
+    }
+
+    //this method creates the first row of buttons
+    private void createFirstRowButtons(GridPane gridPane, Label output)
+    {
+        createClearButtons(gridPane, output);
+        createShowResultsButton(gridPane, output);
+        createPositiveNegativeButton(gridPane, output);
+    }
+
+    //this method creates clear buttons
+    private void createClearButtons(GridPane gridPane, Label output)
+    {
+        createAllClearButton(gridPane, output);
+        createClearButton(gridPane, output);
+    }
+
+    /*
+     * this method creates an all clear button which will not only reset the output text,
+     * but also clears all the operands, operator, and the history results
+     */
+    private void createAllClearButton(GridPane gridPane, Label output)
+    {
         Button allClearButton = new Button("CE");
         allClearButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -113,8 +147,11 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(allClearButton, 0, 1);
+    }
 
-        //create a clear button that resets the output text
+    //this method creates a clear button that resets the output text
+    private void createClearButton(GridPane gridPane, Label output)
+    {
         Button clearButton = new Button("C");
         clearButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -126,11 +163,14 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(clearButton, 1, 1);
+    }
 
-        /*
-         * create a show stored result button that will show one
-         * previous result every time the button is clicked
-         */
+    /*
+     * this method creates a show stored result button that will show one
+     * previous result every time the button is clicked
+     */
+    private void createShowResultsButton(GridPane gridPane, Label output)
+    {
         Button showStoredResultButton = new Button("ANS");
 
         //set a index that is used to go through the results list
@@ -163,8 +203,11 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(showStoredResultButton, 2, 1);
+    }
 
-        //create a positive negative button that will change the sign of the present number
+    //this method creates a positive/negative button that will change the sign of the present number
+    private void createPositiveNegativeButton(GridPane gridPane, Label output)
+    {
         Button positiveNegativeButton = new Button("+/-");
         positiveNegativeButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -177,7 +220,11 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(positiveNegativeButton, 3, 1);
+    }
 
+    //this method creates all the number buttons from 1-9
+    private void createNumberButtons(GridPane gridPane, Label output)
+    {
         //set an int to represent the array's index, starts from 0
         int buttonIndex = 0;
 
@@ -207,7 +254,18 @@ public class CalculatorUI extends Application
                 buttonIndex++;
             }
         }
+    }
 
+    //this method creates all the operators
+    private void createOperatorButtons(GridPane gridPane, Label output)
+    {
+        createNormalOperatorButtons(gridPane, output);
+        createSpecialOperatorButtons(gridPane, output);
+    }
+
+    //this method creates the normal operator buttons
+    private void createNormalOperatorButtons(GridPane gridPane, Label output)
+    {
         //use for loop to create operator buttons
         for (int k = 0; k < OPERATORS.length; k++)
         {
@@ -230,7 +288,11 @@ public class CalculatorUI extends Application
 
             gridPane.add(tempButton, COLUMN_COUNT-2, k + 2);
         }
+    }
 
+    //this method creates special operator buttons
+    private void createSpecialOperatorButtons(GridPane gridPane, Label output)
+    {
         //use for loop to create special operator buttons
         for (int l = 0; l < SPECIAL_OPERATORS.length; l++)
         {
@@ -254,8 +316,19 @@ public class CalculatorUI extends Application
             tempButton.setId("specialOperator");
             gridPane.add(tempButton, COLUMN_COUNT-1, l + 1);
         }
+    }
 
-        //creates the 0 button
+    //this method creates the last row of buttons
+    private void createLastRowButtons(GridPane gridPane, Label output)
+    {
+        createButtonZero(gridPane, output);
+        createDecimalButton(gridPane, output);
+        createEqualButton(gridPane, output);
+    }
+
+    //this method creates the 0 button
+    private void createButtonZero(GridPane gridPane, Label output)
+    {
         Button button0 = new Button("0");
         button0.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -267,8 +340,11 @@ public class CalculatorUI extends Application
             }
         });
         gridPane.add(button0, 0, 5);
+    }
 
-        //creates an decimal button
+    //this method creates an decimal button
+    private void createDecimalButton(GridPane gridPane, Label output)
+    {
         Button decimalButton = new Button(".");
 
         decimalButton.setOnAction(new EventHandler<ActionEvent>()
@@ -285,8 +361,11 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(decimalButton, 1, 5);
+    }
 
-        //creates the equal button
+    //this method creates the equal button
+    private void createEqualButton(GridPane gridPane, Label output)
+    {
         Button equalButton = new Button("=");
 
         equalButton.setOnAction(new EventHandler<ActionEvent>()
@@ -306,12 +385,5 @@ public class CalculatorUI extends Application
         });
 
         gridPane.add(equalButton, 2, 5);
-
-        //add styles to the elements using an external stylesheet
-        Scene mainScene = new Scene(gridPane, 420, 430);
-        mainScene.getStylesheets().add("styles/Styles.css");
-
-        //returns the scene
-        return mainScene;
     }
 }
