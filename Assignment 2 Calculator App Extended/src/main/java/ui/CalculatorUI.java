@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import static calculator.Calculator.*;
 
 /*
  * Hanchen (Zero) Liu
@@ -43,12 +43,6 @@ public class CalculatorUI extends Application
     //set the number of rows
     private static final int ROW_COUNT = 5;
 
-    //create some fields to store information
-    private String operand1 = "";
-    private String operand2 = "";
-    private String operator = "";
-    private ArrayList<String> results = new ArrayList<>();
-    private int resultsIndex;
 
     /**
      * The main entry point for all JavaFX applications.

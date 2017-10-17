@@ -8,6 +8,8 @@ package calculator;
  * This class handles all the calculations
  */
 
+import java.util.ArrayList;
+
 /**
  * This class handles all the calculations
  *
@@ -16,6 +18,13 @@ package calculator;
  */
 public class Calculator
 {
+    //create some public fields to store information
+    public static String operand1 = "";
+    public static String operand2 = "";
+    public static String operator = "";
+    public static ArrayList<String> results = new ArrayList<>();
+    public static int resultsIndex;
+
     /**
      * This method handles normal calculations like addition, subtraction, multiplication, and division
      *
