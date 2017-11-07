@@ -1,0 +1,71 @@
+/*
+ * Hanchen (Zero) Liu
+ * 10/06/2017
+ * Styles.css
+ * This is the stylesheet for the calculator ui
+ */
+
+/*
+    set up the universal style
+ */
+.root{
+    /* use -fx- as prefix for javafx styling*/
+    -fx-background-color: #4d4d4d;
+    -fx-font-family: "Courier New", Courier, monospace;
+    -fx-alignment: center;
+    -fx-vgap: 15px;
+    -fx-hgap: 15px;
+    -fx-padding: 15px;
+}
+
+/*
+    set up styles for the display box
+ */
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 36px;
+    -fx-background-radius: 6px;
+    -fx-min-width: 390px;
+    -fx-max-width: 390px;
+    -fx-padding: 10px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-border-style: solid;
+    -fx-background-color: #b3ffe0;
+    -fx-alignment: center-right;
+}
+
+/*
+    set up styles for buttons
+ */
+.button{
+    -fx-background-radius: 6px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+}
+
+/*
+    set up styles for special buttons
+ */
+.button#specialOperator{
+    -fx-min-width: 90px;
+}
+
+/*
+    removes the blue outline around buttons
+ */
+.button:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.button:hover{
+    -fx-background-color: darkseagreen;
+    -fx-text-fill: white;
+}
