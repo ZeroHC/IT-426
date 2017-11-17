@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import model.CarPart;
 import model.PartsDatabase;
 
 import java.io.File;
@@ -24,9 +25,11 @@ public class PartsDatabaseUI extends Application
 {
     private static final int SCENE_WIDTH = 500;
     private static final int SCENE_HEIGHT = 220;
+    public static final String MISSING_INPUT_ERROR = "One or more input fields are missing!";
 
     //model classes
     private PartsDatabase data;
+    private CarPart part;
 
     //entry fields
     private TextField partId;
@@ -138,7 +141,27 @@ public class PartsDatabaseUI extends Application
         {
             public void handle(ActionEvent event)
             {
-                //...
+                //if any input field is missing, prompt a alert window to user
+                if (partId.getText().isEmpty() || manufacturer.getText().isEmpty() || listPrice.getText().isEmpty()
+                    || categories.getText().isEmpty())
+                {
+                    displayAlertWindow(MISSING_INPUT_ERROR);
+                }
+                //else create a car part with user's input, and add the part to the parts database
+                //and then clear out all input fields for recycling
+                else
+                {
+                    part = new CarPart();
+                    part.setId(partId.getText());
+                    part.setManufacturer(manufacturer.getText());
+                    part.setListPrice(Double.parseDouble(listPrice.getText()));
+                    part.setCategories(categories.getText().split(","));
+                    data.addPart(part);
+                    partId.setText("");
+                    manufacturer.setText("");
+                    listPrice.setText("");
+                    categories.setText("");
+                }
             }
         });
 
@@ -257,5 +280,24 @@ public class PartsDatabaseUI extends Application
         }
 
         return hbox;
+    }
+
+    //this method will display an alert window
+    private void displayAlertWindow(String alertMessage)
+    {
+        //Makes an alert object.
+        Alert alertWindow = new Alert(Alert.AlertType.INFORMATION);
+
+        //Alert Title
+        alertWindow.setTitle("Parts Database");
+
+        //Removes the alert header
+        alertWindow.setHeaderText(null);
+
+        //Alert message
+        alertWindow.setContentText(alertMessage);
+
+        //Displays alert and awaits user action.
+        alertWindow.showAndWait();
     }
 }

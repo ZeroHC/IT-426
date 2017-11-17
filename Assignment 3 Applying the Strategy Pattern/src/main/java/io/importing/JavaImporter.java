@@ -1,5 +1,12 @@
 package io.importing;
 
-public class JavaImporter
+import io.IImporter;
+
+public class JavaImporter implements IImporter
 {
+    @Override
+    public boolean importParts()
+    {
+        return true;
+    }
 }

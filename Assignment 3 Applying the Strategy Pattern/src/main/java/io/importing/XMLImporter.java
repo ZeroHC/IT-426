@@ -1,5 +1,12 @@
 package io.importing;
 
-public class XMLImporter
+import io.IImporter;
+
+public class XMLImporter implements IImporter
 {
+    @Override
+    public boolean importParts()
+    {
+        return true;
+    }
 }

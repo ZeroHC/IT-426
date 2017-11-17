@@ -1,11 +1,15 @@
 package model;
 
-public class CarPart
+import java.io.Serializable;
+
+public class CarPart implements Serializable
 {
     private String id;
     private String manufacturer;
     private double listPrice;
     private String[] categories;
+
+    private static final long serialVersionUID = 42L;
 
     public CarPart()
     {

@@ -1,10 +1,8 @@
 package io;
 
-import model.CarPart;
-
-import java.util.Collection;
+import model.PartsDatabase;
 
 public interface IExporter
 {
-    public boolean exportParts();
+    public boolean exportParts(PartsDatabase database);
 }
