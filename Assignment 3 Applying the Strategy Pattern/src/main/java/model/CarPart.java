@@ -59,6 +59,4 @@ public class CarPart
     {
         this.categories = categories;
     }
-
-
 }
