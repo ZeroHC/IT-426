@@ -1,5 +1,11 @@
 package gui;
 
+import io.exporting.JSONExporter;
+import io.exporting.JavaExporter;
+import io.exporting.XMLExporter;
+import io.importing.JSONImporter;
+import io.importing.JavaImporter;
+import io.importing.XMLImporter;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +31,12 @@ public class PartsDatabaseUI extends Application
 {
     private static final int SCENE_WIDTH = 500;
     private static final int SCENE_HEIGHT = 220;
-    public static final String MISSING_INPUT_ERROR = "One or more input fields are missing!";
+    private static final String MISSING_INPUT_ERROR = "One or more input fields are missing!";
+    private static final String DATABASE_EMPTY_ERROR = "Database is empty";
+    private static final String FILE_NOT_EXIST = "File does not exist!";
+    private static final String FILE_TYPE_JAVA = "Java";
+    private static final String FILE_TYPE_JSON = "JSON";
+    private static final String FILE_TYPE_XML = "XML";
 
     //model classes
     private PartsDatabase data;
@@ -207,11 +218,11 @@ public class PartsDatabaseUI extends Application
         {
             public void handle(ActionEvent event)
             {
-                //...
+                fileExporter();
             }
         });
 
-        String[] options = {"Java", "JSON", "XML"};
+        String[] options = {FILE_TYPE_JAVA, FILE_TYPE_JSON, FILE_TYPE_XML};
         exportToggle = new ToggleGroup();
         HBox exportRButtons = getRadioButtons(exportToggle, options);
 
@@ -228,7 +239,7 @@ public class PartsDatabaseUI extends Application
         {
             public void handle(ActionEvent event)
             {
-                //...
+                fileImporter();
             }
         });
 
@@ -280,6 +291,73 @@ public class PartsDatabaseUI extends Application
         }
 
         return hbox;
+    }
+
+    //this method will write the values from database to different files based on user's choice
+    private void fileExporter()
+    {
+        //create a temporary radio button to represent the selected radio button
+        RadioButton temp = (RadioButton) exportToggle.getSelectedToggle();
+
+        //use a switch statement to check which file type the user wants to write to
+        switch (temp.getText())
+        {
+            case FILE_TYPE_JAVA:
+                JavaExporter javaExporter = new JavaExporter(data);
+                if (javaExporter.exportParts()) displayAlertWindow(DATABASE_EMPTY_ERROR);
+                else javaExporter.javaFileWriter();
+                break;
+
+            case FILE_TYPE_JSON:
+                JSONExporter jsonExporter = new JSONExporter(data);
+                if (jsonExporter.exportParts()) displayAlertWindow(DATABASE_EMPTY_ERROR);
+                else jsonExporter.jsonFileWriter();
+                break;
+
+            case FILE_TYPE_XML:
+                XMLExporter xmlExporter = new XMLExporter(data);
+                if (xmlExporter.exportParts()) displayAlertWindow(DATABASE_EMPTY_ERROR);
+                else xmlExporter.xmlFileWriter();
+                break;
+        }
+    }
+
+    //this method will read the values from different files to the database based on user's choice
+    private void fileImporter()
+    {
+        //create a temporary radio button to represent the selected radio button
+        RadioButton temp = (RadioButton) importToggle.getSelectedToggle();
+
+        //use a switch statement to check which file type the user wants to read from
+        switch (temp.getText())
+        {
+            case FILE_TYPE_JAVA:
+                JavaImporter javaImporter = new JavaImporter();
+                if (!javaImporter.importParts()) displayAlertWindow(FILE_NOT_EXIST);
+                else
+                {
+                    data = javaImporter.javaFileReader();
+                }
+                break;
+
+            case FILE_TYPE_JSON:
+                JSONImporter jsonImporter = new JSONImporter();
+                if (!jsonImporter.importParts()) displayAlertWindow(FILE_NOT_EXIST);
+                else
+                {
+                    data = jsonImporter.jsonFileReader();
+                }
+                break;
+
+            case FILE_TYPE_XML:
+                XMLImporter xmlImporter = new XMLImporter();
+                if (!xmlImporter.importParts()) displayAlertWindow(FILE_NOT_EXIST);
+                else
+                {
+                    data = xmlImporter.xmlFileReader();
+                }
+                break;
+        }
     }
 
     //this method will display an alert window
