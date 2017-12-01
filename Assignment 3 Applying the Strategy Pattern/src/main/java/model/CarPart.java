@@ -1,5 +1,7 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /*
@@ -17,6 +19,7 @@ import java.io.Serializable;
  * @version 1.0
  */
 
+@XmlRootElement
 //implement the Serializable interface for file io
 public class CarPart implements Serializable
 {
@@ -55,6 +58,7 @@ public class CarPart implements Serializable
      * this method gets the car part id
      * @return car part id
      */
+    @XmlElement
     public String getId()
     {
         return id;
@@ -64,6 +68,7 @@ public class CarPart implements Serializable
      * this method gets the car part manufacturer
      * @return car part manufacturer
      */
+    @XmlElement
     public String getManufacturer()
     {
         return manufacturer;
@@ -73,6 +78,7 @@ public class CarPart implements Serializable
      * this method gets the car part listed price
      * @return car part listed price
      */
+    @XmlElement
     public double getListPrice()
     {
         return listPrice;
@@ -82,6 +88,7 @@ public class CarPart implements Serializable
      * this method gets the car part categories
      * @return car part categories
      */
+    @XmlElement
     public String[] getCategories()
     {
         return categories;
