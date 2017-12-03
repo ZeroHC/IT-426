@@ -8,6 +8,8 @@ public class Classroom extends Observable
     {
         //start up the class
 
-        //let other
+        //let others know that our class has started!
+        this.setChanged();
+        this.notifyObservers("Class has started!");
     }
 }

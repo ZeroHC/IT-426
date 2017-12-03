@@ -1,6 +1,7 @@
 package implementing_observer;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MyObservable
@@ -16,7 +17,7 @@ public class MyObservable
     {
         for (MyObserver observer : observers)
         {
-            observer.update(this);
+            observer.update(this, arguments);
         }
     }
 
