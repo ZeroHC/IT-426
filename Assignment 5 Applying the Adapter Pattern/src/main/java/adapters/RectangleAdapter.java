@@ -17,22 +17,22 @@ public class RectangleAdapter implements IShape
     @Override
     public IShape setThickness(double value)
     {
-        return (IShape) new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                rectangle.getHeight(), value, rectangle.getColor(), rectangle.isFill());
+        return new RectangleAdapter(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+                rectangle.getHeight(), value, rectangle.getColor(), rectangle.isFill()));
     }
 
     @Override
     public IShape setColor(Color value)
     {
-        return (IShape) new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                rectangle.getHeight(), rectangle.getThickness(), value, rectangle.isFill());
+        return new RectangleAdapter(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+                rectangle.getHeight(), rectangle.getThickness(), value, rectangle.isFill()));
     }
 
     @Override
     public IShape setFilled(boolean value)
     {
-        return (IShape) new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                rectangle.getHeight(), rectangle.getThickness(), rectangle.getColor(), value);
+        return new RectangleAdapter(new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+                rectangle.getHeight(), rectangle.getThickness(), rectangle.getColor(), value));
     }
 
     @Override

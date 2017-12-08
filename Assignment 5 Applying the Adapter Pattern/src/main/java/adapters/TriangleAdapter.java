@@ -19,22 +19,22 @@ public class TriangleAdapter implements IShape
     @Override
     public IShape setThickness(double value)
     {
-        return (IShape) new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
-                value, triangle.getColor(), triangle.isFill());
+        return new TriangleAdapter(new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
+                value, triangle.getColor(), triangle.isFill()));
     }
 
     @Override
     public IShape setColor(Color value)
     {
-        return (IShape) new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
-                triangle.getThickness(), value, triangle.isFill());
+        return new TriangleAdapter(new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
+                triangle.getThickness(), value, triangle.isFill()));
     }
 
     @Override
     public IShape setFilled(boolean value)
     {
-        return (IShape) new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
-                triangle.getThickness(), triangle.getColor(), value);
+        return new TriangleAdapter(new Triangle(triangle.getX(), triangle.getY(), triangle.getWidth(), triangle.getHeight(),
+                triangle.getThickness(), triangle.getColor(), value));
     }
 
     @Override

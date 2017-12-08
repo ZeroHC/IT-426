@@ -17,22 +17,22 @@ public class LineAdapter implements IShape
     @Override
     public IShape setThickness(double value)
     {
-        return (IShape) new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
-                value, line.getColor(), line.isFill());
+        return new LineAdapter(new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
+                value, line.getColor(), line.isFill()));
     }
 
     @Override
     public IShape setColor(Color value)
     {
-        return (IShape) new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
-                line.getThickness(), value, line.isFill());
+        return new LineAdapter(new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
+                line.getThickness(), value, line.isFill()));
     }
 
     @Override
     public IShape setFilled(boolean value)
     {
-        return (IShape) new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
-                line.getThickness(), line.getColor(), value);
+        return new LineAdapter(new Line(line.getX(), line.getY(), line.getX2(), line.getY2(),
+                line.getThickness(), line.getColor(), value));
     }
 
     @Override

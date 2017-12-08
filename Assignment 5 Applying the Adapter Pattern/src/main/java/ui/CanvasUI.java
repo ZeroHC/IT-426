@@ -21,11 +21,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import shapes.Circle;
+import shapes.Line;
 import shapes.Rectangle;
 import shapes.Triangle;
 
+import java.util.Random;
+
 public class CanvasUI extends Application
 {
+
+    private static final Random RANDOM = new Random();
 
     private static final int WIDTH = 820;
     private static final int HEIGHT = 680;
@@ -34,15 +39,23 @@ public class CanvasUI extends Application
     private static final int MIN_THICKNESS_VALUE = 1;
     private static final int MAX_THICKNESS_VALUE = 10;
     private static final int CIRCLE_RADIUS = 20;
-    public static final int RECTANGLE_WIDTH = 80;
-    public static final int RECTANGLE_HEIGHT = 60;
-    public static final int TRIANGLE_WIDTH = 30;
-    public static final int TRIANGLE_LENGTH = 50;
+    private static final int RECTANGLE_WIDTH = 80;
+    private static final int RECTANGLE_HEIGHT = 60;
+    private static final int TRIANGLE_WIDTH = 30;
+    private static final int TRIANGLE_LENGTH = 50;
 
-    private CircleAdapter circle;
-    private RectangleAdapter rectangle;
-    private TriangleAdapter triangle;
-    private LineAdapter line;
+    private double xPosition;
+    private double yPosition;
+
+    private Circle circle;
+    private Rectangle rectangle;
+    private Triangle triangle;
+    private Line line;
+
+    private CircleAdapter circleAdapter;
+    private RectangleAdapter rectangleAdapter;
+    private TriangleAdapter triangleAdapter;
+    private LineAdapter lineAdapter;
 
     private SavedShapes savedShapes;
 
@@ -54,6 +67,8 @@ public class CanvasUI extends Application
 
     public void start(Stage stage)
     {
+        shapeInitializer();
+
         stage.setTitle("Doodle Pad");
 
         stage.setScene(mainScene());
@@ -69,22 +84,22 @@ public class CanvasUI extends Application
         functionsContainer.setId("functionsContainer");
 
         ToggleButton circleButton = new ToggleButton();
-        circleButton.setUserData(circle);
+        circleButton.setUserData(circleAdapter);
         circleButton.setToggleGroup(SHAPE_SELECTORS);
         circleButton.setId("circleButton");
 
         ToggleButton rectangleButton = new ToggleButton();
-        rectangleButton.setUserData(rectangle);
+        rectangleButton.setUserData(rectangleAdapter);
         rectangleButton.setToggleGroup(SHAPE_SELECTORS);
         rectangleButton.setId("rectangleButton");
 
         ToggleButton triangleButton = new ToggleButton();
-        triangleButton.setUserData(triangle);
+        triangleButton.setUserData(triangleAdapter);
         triangleButton.setToggleGroup(SHAPE_SELECTORS);
         triangleButton.setId("triangleButton");
 
         ToggleButton lineButton = new ToggleButton();
-        lineButton.setUserData(line);
+        lineButton.setUserData(lineAdapter);
         lineButton.setToggleGroup(SHAPE_SELECTORS);
         lineButton.setId("lineButton");
 
@@ -158,20 +173,12 @@ public class CanvasUI extends Application
             public void handle(MouseEvent event)
             {
                 //mouse position
-                double x = event.getX();
-                double y = event.getY();
+                xPosition = event.getX();
+                yPosition = event.getY();
 
                 GraphicsContext graphics = canvas.getGraphicsContext2D();
 
-                circle = new CircleAdapter(new Circle(CIRCLE_RADIUS, x, y, thicknessValue,
-                        color, fillFlag));
-
-                rectangle = new RectangleAdapter(new Rectangle(x, y, RECTANGLE_WIDTH, RECTANGLE_HEIGHT,
-                        thicknessValue, color, fillFlag));
-
-                triangle = new TriangleAdapter(new Triangle(x, y, TRIANGLE_WIDTH, TRIANGLE_LENGTH, thicknessValue, color, fillFlag));
-
-                savedShapes.drawShapes(graphics);
+                shapePrinter(graphics);
             }
         });
 
@@ -187,33 +194,64 @@ public class CanvasUI extends Application
     }
     private void shapeUpdater()
     {
-        if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == circle)
+        if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == circleAdapter)
         {
-            savedShapes.update(circle, thicknessValue,
+            savedShapes.update(circleAdapter, thicknessValue,
                     color, fillFlag);
         }
-        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == rectangle)
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == rectangleAdapter)
         {
-            savedShapes.update(rectangle,  thicknessValue,
+            savedShapes.update(rectangleAdapter,  thicknessValue,
                     color, fillFlag);
         }
-        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == triangle)
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == triangleAdapter)
         {
-            savedShapes.update(triangle,  thicknessValue,
+            savedShapes.update(triangleAdapter,  thicknessValue,
                     color, fillFlag);
         }
-        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == line)
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == lineAdapter)
         {
-            savedShapes.update(circle,  thicknessValue,
+            savedShapes.update(lineAdapter,  thicknessValue,
                     color, fillFlag);
+        }
+    }
+
+    private void shapePrinter(GraphicsContext graphics)
+    {
+        if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == circleAdapter)
+        {
+            circleAdapter.drawShape(graphics);
+        }
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == rectangleAdapter)
+        {
+            rectangleAdapter.drawShape(graphics);
+        }
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == triangleAdapter)
+        {
+            triangleAdapter.drawShape(graphics);
+        }
+        else if (SHAPE_SELECTORS.getSelectedToggle().getUserData() == lineAdapter)
+        {
+            lineAdapter.drawShape(graphics);
         }
     }
 
     private void shapeInitializer()
     {
-        savedShapes.add(circle);
-        savedShapes.add(rectangle);
-        savedShapes.add(triangle);
-        savedShapes.add(line);
+        circleAdapter = new CircleAdapter(new Circle(CIRCLE_RADIUS, xPosition, yPosition, thicknessValue,
+                color, fillFlag));
+        rectangleAdapter = new RectangleAdapter(new Rectangle(xPosition, yPosition, RECTANGLE_WIDTH, RECTANGLE_HEIGHT,
+                thicknessValue, color, fillFlag));
+        triangleAdapter = new TriangleAdapter(new Triangle(xPosition, yPosition, TRIANGLE_WIDTH, TRIANGLE_LENGTH,
+                thicknessValue, color, fillFlag));
+        lineAdapter = new LineAdapter(new Line(xPosition, yPosition, xPosition + RANDOM.nextInt(100) - 50, yPosition + RANDOM.nextInt(100) - 50,
+                thicknessValue, color, fillFlag));
+
+        savedShapes = new SavedShapes();
+
+        savedShapes.add(circleAdapter);
+        savedShapes.add(rectangleAdapter);
+        savedShapes.add(triangleAdapter);
+        savedShapes.add(lineAdapter);
     }
 }

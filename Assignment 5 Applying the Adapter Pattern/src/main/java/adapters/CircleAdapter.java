@@ -17,22 +17,22 @@ public class CircleAdapter implements IShape
     @Override
     public IShape setThickness(double value)
     {
-        return (IShape)new Circle(circle.getRadius(), circle.getX(), circle.getY(), value, circle.getColor(),
-                circle.isFill());
+        return new CircleAdapter(new Circle(circle.getRadius(), circle.getX(), circle.getY(), value, circle.getColor(),
+                circle.isFill()));
     }
 
     @Override
     public IShape setColor(Color value)
     {
-        return (IShape)new Circle(circle.getRadius(), circle.getX(), circle.getY(), circle.getThickness(), value,
-                circle.isFill());
+        return new CircleAdapter(new Circle(circle.getRadius(), circle.getX(), circle.getY(), circle.getThickness(), value,
+                circle.isFill()));
     }
 
     @Override
     public IShape setFilled(boolean value)
     {
-        return (IShape)new Circle(circle.getRadius(), circle.getX(), circle.getY(), circle.getThickness(),
-                circle.getColor(), value);
+        return new CircleAdapter(new Circle(circle.getRadius(), circle.getX(), circle.getY(), circle.getThickness(),
+                circle.getColor(), value));
     }
 
     @Override
